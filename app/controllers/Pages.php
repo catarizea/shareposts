@@ -5,13 +5,15 @@ class Pages extends Controller {
 
   public function index() {  
     $this->view('pages/index', [
-      'title' => 'Share posts'
+      'title' => 'Share posts',
+      'description' => 'Simple social network built on the Catalin MVC framework'
     ]);
   }
 
   public function about() {
     $this->view('pages/about', [
-      'title' => 'About'
+      'title' => 'About',
+      'description' => 'App to share posts with other users'
     ]);
   }
 }

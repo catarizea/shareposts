@@ -16,6 +16,7 @@ define(DB_PASS, 'your-password');
 define(DB_NAME, 'your-db-name');
 
 define('APPROOT', dirname(dirname(__FILE__)));
-define('URLROOT', 'http://php-mvc.vhx.cloud:8080');
+define('URLROOT', 'http://shareposts.vhx.cloud:8080');
 define('SITENAME', 'Catalin MVC');
+define('APPVERSION', '1.0.0');
 ```
