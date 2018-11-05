@@ -1,10 +1,8 @@
 <?php
 
 class Users extends Controller {
-  private $userModel;
-  
   public function __construct() {
-    $this->userModel = parent::model('User');
+    $this->userModel = $this->model('User');
   }
 
   public function register() {
