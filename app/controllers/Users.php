@@ -1,8 +1,10 @@
 <?php
 
 class Users extends Controller {
+  private $userModel;
+  
   public function __construct() {
-
+    $this->userModel = parent::model('User');
   }
 
   public function register() {
@@ -22,6 +24,8 @@ class Users extends Controller {
 
       if (empty($data['email'])) {
         $data['email_error'] = 'Please enter email';
+      } elseif ($this->userModel->findUserByEmail($data['email'])) {
+        $data['email_error'] = 'Email is already taken';
       }
       
       if (empty($data['name'])) {
