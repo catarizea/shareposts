@@ -3,7 +3,11 @@ class Pages extends Controller {
   public function __construct() {
   }
 
-  public function index() {  
+  public function index() {
+    if (isLoggedIn()) {
+      redirect('posts');
+    }  
+    
     $this->view('pages/index', [
       'title' => 'Share posts',
       'description' => 'Simple social network built on the Catalin MVC framework'
