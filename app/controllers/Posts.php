@@ -129,4 +129,24 @@ class Posts extends Controller {
 
     $this->view('posts/edit', $data);
   }
+
+  public function delete($id) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $post = $this->postModel->getPostById($id);
+      if ($post && $post->user_id != $_SESSION['user_id']) {
+        redirect('posts');
+      }
+      
+      if ($this->postModel->deletePost($id)) {
+        flash('post_message', 'Post deleted');
+        redirect('posts');
+        return;
+      }
+
+      die('Something went wrong');
+      return;
+    }
+
+    redirect('posts');
+  }
 }
