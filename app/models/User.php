@@ -7,6 +7,12 @@ class User {
     $this->db = new Database;
   }
 
+  public function getUserById($id) {
+    $this->db->query("SELECT * FROM users WHERE id=:id");
+    $this->db->bind(':id', $id);
+    return $this->db->single();
+  }
+
   public function findUserByEmail($email) {
     $this->db->query("SELECT * FROM users WHERE email=:email");
     $this->db->bind(':email', $email);
