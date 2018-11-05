@@ -19,6 +19,7 @@ class Core {
     $this->setCurrentController($url);
     // unset 0 index
     unset($url[0]);
+    
     $this->setCurrentMethod($url);
     // unset 1 index
     unset($url[1]);
