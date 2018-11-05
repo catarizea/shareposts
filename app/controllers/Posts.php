@@ -21,6 +21,42 @@ class Posts extends Controller {
   }
 
   public function add() {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      $data = [
+        'title' => trim($_POST['title']),
+        'body' => trim($_POST['body']),
+        'user_id' => $_SESSION['user_id'],
+        'title_error' => '',
+        'body_error' => ''
+      ];
+      
+      if (empty($data['title'])) {
+        $data['title_error'] = 'Please enter title';
+      }
+
+      if (empty($data['body'])) {
+        $data['body_error'] = 'Please enter body text';
+      }
+
+      if (empty($data['title_error']) && empty($data['body_error'])) {
+        if ($this->postModel->addPost($data)) {
+          flash('post_message', 'Post added');
+          redirect('/posts');
+          return;
+        }
+
+        die('Something went wrong');
+
+        return;
+      }
+
+      $this->view('posts/add', $data);
+
+      return;
+    }
+    
     $data = [
       'title' => '',
       'body' => ''
