@@ -1,6 +1,7 @@
 <?php
-
 class Users extends Controller {
+  private $userModel;
+  
   public function __construct() {
     $this->userModel = $this->model('User');
   }
@@ -44,7 +45,13 @@ class Users extends Controller {
 
       if (empty($data['email_error']) && empty($data['name_error'])
         && empty($data['password_error']) && empty($data['confirm_password_error'])) {
-        die('Success');
+        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+        if ($this->userModel->register($data)) {
+          redirect('users/login');
+        } else {
+          die('Something went wrong');
+        }
       }
 
       $this->view('users/register', $data);
