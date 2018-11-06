@@ -14,8 +14,7 @@ class Core {
     $url;
 
   public function __construct() {
-    $this->url = $this->getUrl();
-    $this->setCurrentController()->setCurrentMethod()->setParams();
+    $this->getUrl()->setCurrentController()->setCurrentMethod()->setParams();
   }
 
   private function setParams() {
@@ -42,10 +41,12 @@ class Core {
     return $this;
   }
 
-  public function getUrl() {
+  private function getUrl() {
     if (isset($_GET['url'])) {
-      return explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
+      $this->url = explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
     }
+
+    return $this;
   }
 
 }
